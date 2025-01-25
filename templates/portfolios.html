@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="url_for()" />
+  </head>
+  <body>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Job Title</th>
+          <th>Job Title's Logo</th>
+          <th>cv_link</th>
+          <th>email</th>
+          <th>about</th>
+          <th>card1title</th>
+          <th>card1info</th>
+          <th>card2title</th>
+          <th>card2info</th>
+          <th>aboutLinkOne</th>
+          <th>aboutlinktwo</th>
+          <th>picture</th>
+          <th>user id</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for port in portfolios %}
+        <tr>
+          <td>{{ port.name }}</td>
+          <td>{{ port.job_title }}</td>
+          <td>{{ port.job_title_logo }}</td>
+          <td>{{ port.cv_link }}</td>
+          <td>{{ port.email }}</td>
+          <td>{{ port.about }}</td>
+          <td>{{ port.card1title }}</td>
+          <td>{{ port.card1info }}</td>
+          <td>{{ port.card2title }}</td>
+          <td>{{ port.card2info }}</td>
+          <td>{{ port.aboutlinkone }}</td>
+          <td>{{ port.aboutlinktwo }}</td>
+          <td>{{ port.picture }}</td>
+          <td>{{ port.user_id }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>

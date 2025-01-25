@@ -17,7 +17,8 @@ app = Flask(__name__)
 
 
 # Configure the database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://neondb_owner:npg_pv9e8WXYMrRk@ep-sweet-queen-a2whfnhf-pooler.eu-central-1.aws.neon.tech/neondb?sslmode=require'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://neondb_owner:npg_pv9e8WXYMrRk@ep-sweet-queen-a2whfnhf-pooler.eu-central-1.aws.neon.tech/neondb?sslmode=require'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:sudofetch@localhost/accounts'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 CORS(app, supports_credentials=True, resources={r"/*": {"origins": "http://localhost:5173"}})
 db = SQLAlchemy(app)
@@ -385,5 +386,5 @@ def admin():
             
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000)
+    app.run(debug=True)
 
