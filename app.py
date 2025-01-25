@@ -19,7 +19,7 @@ app = Flask(__name__)
 # Configure the database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://neondb_owner:npg_pv9e8WXYMrRk@ep-sweet-queen-a2whfnhf-pooler.eu-central-1.aws.neon.tech/neondb?sslmode=require'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-CORS(app, supports_credentials=True, resources={r"/*": {"origins": "https://mahmoudgea2005.github.io/portfolio-generator/"}})
+CORS(app, supports_credentials=True)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
