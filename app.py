@@ -10,6 +10,8 @@ from werkzeug.utils import secure_filename
 from flask_migrate import Migrate
 from sqlalchemy.dialects.postgresql import ARRAY
 from sqlalchemy.ext.mutable import MutableList 
+from PIL import Image
+
 
 
 app = Flask(__name__)
@@ -35,6 +37,17 @@ app.config['JWT_COOKIE_CSRF_PROTECT'] = False  # Optional, if you are not using 
 
 jwt = JWTManager(app)
 
+
+MAX_IMAGE_SIZE = (800, 800)
+QUALITY = 85
+
+
+def compress_image(image_path, output_path):
+    img = Image.open(image_path)
+
+    img.thmubnail(MAX_IMAGE_SIZE)
+
+    img.save(output_path, format='JPEG', quality=QUALITY, optimize=True)
 
 
 
@@ -257,7 +270,6 @@ def create():
             youtube = request.form.get("youtube")
             linkedin = request.form.get("linkedin")
             user_id = get_jwt_identity()
-            print("testing")
             picture = None
             if 'picture' in request.files:
                 picture_file = request.files['picture']
@@ -265,8 +277,16 @@ def create():
                     root_picture_filename = secure_filename(picture_file.filename)
                     picture_filename = f"{uuid.uuid4().hex}_{root_picture_filename}"
                     picture_path = os.path.join('static', 'imgUploads', picture_filename)
-                    picture_file.save(picture_path)
+
+                    temp_path = os.path.join('static', 'imgUploads', f"temp_{picture_filename}")
+                    picture_file.save(temp_path)
+
+                    compress_image(temp_path, picture_path)
+
+                    os.remove(temp_path)
+
                     picture = picture_path
+                    
             portfolio = Design1(user_id=user_id, name=name, job_title=job_title, job_title_logo=job_title_logo, cv_link=cv_link, email=email, about=about, card1title=card1title, card1info=card1info, card2title=card2title, card2info=card2info, aboutlinkonelabel=aboutlinkonelabel, aboutlinkone=aboutlinkone, aboutlinktwolabel=aboutlinktwolabel, aboutlinktwo=aboutlinktwo, github=github, youtube=youtube, linkedin=linkedin, picture=picture)
             users_ports = UsersPortfolios.query.filter_by(user_id=user_id).first()
             if users_ports:
