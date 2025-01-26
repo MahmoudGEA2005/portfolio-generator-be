@@ -45,6 +45,9 @@ QUALITY = 85
 def compress_image(image_path, output_path):
     img = Image.open(image_path)
 
+    if img.mode == 'RGBA':
+        img = img.convert('RGB')
+
     img.thumbnail(MAX_IMAGE_SIZE)
 
     img.save(output_path, format='JPEG', quality=QUALITY, optimize=True)
