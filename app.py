@@ -137,6 +137,10 @@ with app.app_context():
     db.create_all()
 
 
+@app.route("/", methods=["GET", "POST"])
+def mainPath():
+    return "Application is working"
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     response = [{"state": "errors"}]
