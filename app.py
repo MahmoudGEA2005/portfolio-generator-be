@@ -219,8 +219,8 @@ def login():
                     access_token, 
                     max_age=86400, 
                     secure=True,  # Set this to True when using HTTPS
-                    samesite='Lax'  # Allow cross-site requests (needed for cross-origin)
-                    domain='https://nameless-oasis-38481-2bd1b8ebfc5e.herokuapp.com/'
+                    samesite='Lax',  # Allow cross-site requests (needed for cross-origin)
+                    domain='https://nameless-oasis-38481-2bd1b8ebfc5e.herokuapp.com/',
                     httponly=True
                 )
 
